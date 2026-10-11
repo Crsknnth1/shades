@@ -1,0 +1,9 @@
+services:
+  desktop:
+    build: ./container
+    image: shades-desktop
+    hostname: shades
+    # Bound to localhost only: the VNC session has no password.
+    ports:
+      - "127.0.0.1:6080:6080"
+    shm_size: 2gb
