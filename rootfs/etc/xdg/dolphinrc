@@ -1,0 +1,6 @@
+# Make Dolphin behave more like File Explorer.
+[General]
+RememberOpenedTabs=false
+ShowFullPath=false
+ShowFullPathInTitlebar=false
+ConfirmClosingMultipleTabs=false

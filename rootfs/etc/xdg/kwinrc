@@ -1,0 +1,21 @@
+[Desktops]
+Number=1
+Rows=1
+
+# No hot corners: Windows doesn't have them.
+[ElectricBorders]
+TopLeft=None
+
+[Effect-overview]
+BorderActivate=9
+
+# Windows-style titlebar: minimize, maximize, close on the right; nothing on the left.
+[org.kde.kdecoration2]
+ButtonsOnLeft=
+ButtonsOnRight=IAX
+library=org.kde.breeze
+theme=Breeze
+
+# Alt+Tab shows a grid of window thumbnails.
+[TabBox]
+LayoutName=thumbnail_grid

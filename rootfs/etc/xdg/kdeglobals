@@ -1,0 +1,18 @@
+[General]
+font=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Inter,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[Icons]
+Theme=Fluent-light
+
+[KDE]
+LookAndFeelPackage=org.shades.desktop
+SingleClick=false
+widgetStyle=Breeze
+
+[WM]
+activeFont=Inter,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1
+
+# setup-rootfs.sh appends the ShadesLight color groups below this line.

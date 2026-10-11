@@ -1,0 +1,26 @@
+# Windows-style keyboard shortcuts. Plasma already uses Win+E (files), Win+L (lock),
+# Win+D (show desktop), Win+V (clipboard), and Win+Left/Right (snap).
+# This lives in /etc/skel, not /etc/xdg: kglobalaccel only reads the user's own file.
+
+[kwin]
+Overview=Meta+Tab\tMeta+W,Meta+W,Toggle Overview
+Window Maximize=Meta+Up\tMeta+PgUp,Meta+PgUp,Maximize Window
+Window Minimize=Meta+Down\tMeta+PgDown,Meta+PgDown,Minimize Window
+Window Quick Tile Top=none,Meta+Up,Quick Tile Window to the Top
+Window Quick Tile Bottom=none,Meta+Down,Quick Tile Window to the Bottom
+
+[plasmashell]
+next activity=none,Meta+Tab,Walk through activities
+
+[services][org.kde.krunner.desktop]
+_launch=Meta+R\tAlt+Space\tAlt+F2\tSearch
+
+[services][systemsettings.desktop]
+_launch=Meta+I
+
+[services][org.kde.plasma-systemmonitor.desktop]
+_launch=Ctrl+Shift+Esc
+
+# Spectacle already takes Win+Shift+S; free up Win+R (its record-region default) for Run.
+[services][org.kde.spectacle.desktop]
+RecordRegion=Meta+Shift+R

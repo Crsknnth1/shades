@@ -1,6 +1,8 @@
 services:
   desktop:
-    build: ./container
+    build:
+      context: .
+      dockerfile: container/Dockerfile
     image: shades-desktop
     hostname: shades
     # Bound to localhost only: the VNC session has no password.

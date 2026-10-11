@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Shades start button: four window-blind slats. -->
+  <defs>
+    <linearGradient id="slat" gradientUnits="userSpaceOnUse" x1="8" y1="8" x2="56" y2="56">
+      <stop offset="0" stop-color="#4cc2ff"/>
+      <stop offset="1" stop-color="#0067c0"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#slat)">
+    <rect x="8" y="8" width="48" height="10" rx="3"/>
+    <rect x="8" y="21" width="48" height="10" rx="3"/>
+    <rect x="8" y="34" width="48" height="10" rx="3"/>
+    <rect x="8" y="47" width="48" height="10" rx="3"/>
+  </g>
+</svg>

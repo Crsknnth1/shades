@@ -1,0 +1,15 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Shades"
+            }
+        ],
+        "Description": "Windows 11-style desktop: centered taskbar, light Fluent look",
+        "Id": "org.shades.desktop",
+        "License": "GPLv2+",
+        "Name": "Shades"
+    },
+    "X-Plasma-APIVersion": "2"
+}

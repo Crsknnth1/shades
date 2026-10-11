@@ -1,0 +1,12 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Shades"
+            }
+        ],
+        "Id": "Shades",
+        "License": "CC-BY-SA-4.0",
+        "Name": "Shades"
+    }
+}

@@ -1,0 +1,4 @@
+# Skip the login splash screen: straight to the desktop.
+[KSplash]
+Engine=none
+Theme=None
