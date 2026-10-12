@@ -87,6 +87,8 @@ Shades ships no Microsoft logos, fonts, or wallpapers. It uses look-alikes inste
 
 | App | For |
 |---|---|
+| Notepad, Photos, Calculator, Paint, Media Player | KDE's KWrite, Gwenview, KCalc, KolourPaint, and Haruna under Windows names, set as the defaults for text, images, and audio/video. Notepad is set up plain: no line numbers or minimap, word wrap on. |
+| File Explorer | Also opens zip files like folders, as Windows does. |
 | Microsoft Edge | Default browser and PDF viewer. Ships with policies that skip the first-run tour and turn off telemetry, shopping, rewards, Copilot, and the news feed. |
 | ONLYOFFICE | Opens Word, Excel, and PowerPoint files (and OpenDocument). |
 | Word / Excel / PowerPoint / Outlook (web) | Microsoft's Office web apps in their own Edge windows. Needs a Microsoft account. |
