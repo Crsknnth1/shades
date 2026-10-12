@@ -1,0 +1,4 @@
+# Default cursor outside Plasma (and before it starts): Windows-style white pointer.
+# Registered as the x-cursor-theme alternative by setup-rootfs.sh.
+[Icon Theme]
+Inherits=Breeze_Light

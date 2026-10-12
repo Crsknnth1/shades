@@ -8,7 +8,7 @@ BrowserApplication=microsoft-edge.desktop
 TerminalApplication=konsole
 
 [Icons]
-Theme=Fluent-light
+Theme=Fluent-yellow-light
 
 [KDE]
 LookAndFeelPackage=org.shades.desktop

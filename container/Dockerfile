@@ -26,7 +26,7 @@ RUN mkdir -p /src/selawik /out/usr/share/fonts/truetype/selawik \
 RUN mkdir -p /src/fluent /out/usr/share/icons \
     && curl -fsSL "https://github.com/vinceliuice/Fluent-icon-theme/archive/refs/tags/${FLUENT_ICONS_TAG}.tar.gz" \
         | tar -xz -C /src/fluent --strip-components=1 \
-    && /src/fluent/install.sh -d /out/usr/share/icons \
+    && /src/fluent/install.sh -d /out/usr/share/icons yellow \
     && sed -i 's/^Inherits=hicolor$/Inherits=breeze,hicolor/' /out/usr/share/icons/Fluent*/index.theme
 
 COPY artwork/ /src/artwork/

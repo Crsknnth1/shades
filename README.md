@@ -60,7 +60,7 @@ Shades ships no Microsoft logos, fonts, or wallpapers. It uses look-alikes inste
   "All apps", "Recommended" recent files, and your account and power button along the bottom.
 - **Titlebars:** Windows 11-style, via [Klassy](https://github.com/paulmcauley/klassy): title on the
   left, wide flat minimize / maximize / close buttons, red close on hover, rounded corners.
-- **Theme:** Shades Light colors (Windows 11 greys and blue accent), Fluent icons, and Selawik, Microsoft's open-source stand-in for the Segoe UI font (apps asking for "Segoe UI" get it too).
+- **Theme:** Shades Light colors (Windows 11 greys and blue accent), Fluent icons with yellow folders, the white Windows-style pointer, and Selawik, Microsoft's open-source stand-in for the Segoe UI font (apps asking for "Segoe UI" get it too).
 - **Windows names:** File Explorer, Task Manager, Settings, Terminal, Screenshot.
 - **Solid, not see-through:** menus and panels are opaque. Virtual machines have no GPU for blur,
   and translucency without blur looks muddy.

@@ -89,6 +89,10 @@ sed -i 's/^\(\s*\)visible: configureAction \&\& configureAction.visible$/\1visib
 grep -q "Shades: no Configure Taskbar" "$menu_qml" \
     || { echo "setup-rootfs: could not patch the task manager's ContextMenu.qml" >&2; exit 1; }
 
+# White, Windows-style pointer everywhere, including outside Plasma.
+update-alternatives --install /usr/share/icons/default/index.theme x-cursor-theme /usr/share/shades/cursor.theme 100
+update-alternatives --set x-cursor-theme /usr/share/shades/cursor.theme
+
 # File Explorer toolbar: KXMLGUI only picks up a newer dolphinui.rc from the user's own
 # data folder, so give every new user a copy.
 install -D -m 644 /usr/share/kxmlgui5/dolphin/dolphinui.rc /etc/skel/.local/share/kxmlgui5/dolphin/dolphinui.rc

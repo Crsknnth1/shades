@@ -5,7 +5,7 @@ widgetStyle=Breeze
 ColorScheme=ShadesLight
 
 [kdeglobals][Icons]
-Theme=Fluent-light
+Theme=Fluent-yellow-light
 
 [plasmarc][Theme]
 name=shades
@@ -14,7 +14,7 @@ name=shades
 Image=Shades
 
 [kcminputrc][Mouse]
-cursorTheme=breeze_cursors
+cursorTheme=Breeze_Light
 
 [kwinrc][org.kde.kdecoration2]
 library=org.kde.klassy
