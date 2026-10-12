@@ -21,6 +21,7 @@ import org.kde.plasma.private.brightnesscontrolplugin
 import org.kde.plasma.workspace.components as WorkspaceComponents
 import org.kde.bluezqt as BluezQt
 import org.kde.notificationmanager as NotificationManager
+import org.kde.plasma.private.mpris as Mpris
 import org.kde.kcmutils as KCM
 import org.kde.kirigami as Kirigami
 
@@ -95,6 +96,13 @@ PlasmoidItem {
     }
     //END
 
+    //BEGIN Media (whatever is playing, via MPRIS)
+    Mpris.Mpris2Model { id: mpris }
+    readonly property var player: mpris.currentPlayer
+    readonly property bool hasMedia: !!player && player.playbackStatus > Mpris.PlaybackStatus.Stopped
+    readonly property bool mediaPlaying: hasMedia && player.playbackStatus === Mpris.PlaybackStatus.Playing
+    //END
+
     //BEGIN Bluetooth
     readonly property bool bluetoothAvailable: BluezQt.Manager.adapters.length > 0 || BluezQt.Manager.bluetoothBlocked
     function setBluetoothEnabled(enable: bool) {
@@ -160,6 +168,74 @@ PlasmoidItem {
         Layout.preferredWidth: Kirigami.Units.gridUnit * 20
         Layout.minimumWidth: Layout.preferredWidth
         spacing: 0
+
+        // Now playing: album art, title and artist, and previous / play-pause / next,
+        // shown above the tiles while something is playing, as in Windows 11.
+        Rectangle {
+            visible: root.hasMedia
+            Layout.fillWidth: true
+            Layout.margins: Kirigami.Units.gridUnit
+            Layout.bottomMargin: 0
+            Layout.preferredHeight: mediaRow.implicitHeight + Kirigami.Units.largeSpacing * 2
+            radius: 6
+            color: root.lightTheme ? Qt.rgba(1, 1, 1, 0.8) : Qt.rgba(1, 1, 1, 0.08)
+            border.width: 1
+            border.color: root.lightTheme ? Qt.rgba(0, 0, 0, 0.08) : Qt.rgba(1, 1, 1, 0.08)
+
+            RowLayout {
+                id: mediaRow
+                anchors.fill: parent
+                anchors.margins: Kirigami.Units.largeSpacing
+                spacing: Kirigami.Units.largeSpacing
+
+                Image {
+                    Layout.preferredWidth: Kirigami.Units.gridUnit * 2.6
+                    Layout.preferredHeight: Layout.preferredWidth
+                    source: root.player?.artUrl ?? ""
+                    fillMode: Image.PreserveAspectCrop
+                    visible: status === Image.Ready
+                    sourceSize.width: Layout.preferredWidth * 2
+                }
+                Kirigami.Icon {
+                    Layout.preferredWidth: Kirigami.Units.gridUnit * 2.6
+                    Layout.preferredHeight: Layout.preferredWidth
+                    visible: !(root.player?.artUrl)
+                    source: root.player?.iconName || "media-default-album"
+                }
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    spacing: 0
+                    PC3.Label {
+                        Layout.fillWidth: true
+                        elide: Text.ElideRight
+                        font.weight: Font.DemiBold
+                        text: root.player?.track || root.player?.identity || ""
+                    }
+                    PC3.Label {
+                        Layout.fillWidth: true
+                        elide: Text.ElideRight
+                        opacity: 0.7
+                        font: Kirigami.Theme.smallFont
+                        text: root.player?.artist || root.player?.identity || ""
+                    }
+                }
+                PC3.ToolButton {
+                    icon.name: "media-skip-backward"
+                    enabled: root.player?.canGoPrevious ?? false
+                    onClicked: root.player.Previous()
+                }
+                PC3.ToolButton {
+                    icon.name: root.mediaPlaying ? "media-playback-pause" : "media-playback-start"
+                    enabled: root.player?.canControl ?? false
+                    onClicked: root.mediaPlaying ? root.player.Pause() : root.player.Play()
+                }
+                PC3.ToolButton {
+                    icon.name: "media-skip-forward"
+                    enabled: root.player?.canGoNext ?? false
+                    onClicked: root.player.Next()
+                }
+            }
+        }
 
         // Toggle tiles, three to a row. Hardware tiles only show when the machine has it.
         GridLayout {

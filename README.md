@@ -27,6 +27,10 @@ Shades ships no Microsoft logos, fonts, or wallpapers. It uses look-alikes inste
   Windows 11. It opens tiles for Wi-Fi, Bluetooth, Airplane mode, and Battery saver (each
   only on hardware that has it) plus Do not disturb, brightness and volume sliders, and the
   battery level with a Settings shortcut. Scroll over the button to change the volume.
+  While music or video plays, a "now playing" card with play/pause, previous, and next sits on
+  top. (It works with apps that publish MPRIS, such as Spotify, VLC, Firefox, and Chrome;
+  Edge for Linux doesn't.)
+- **Desktop:** a Recycle Bin icon in the top-left corner, like Windows.
 - **Start menu:** Shades' own Windows 11-style menu: search on top, a "Pinned" grid with
   "All apps", "Recommended" recent files, and your account and power button along the bottom.
 - **Titlebars:** Windows 11-style, via [Klassy](https://github.com/paulmcauley/klassy): title on the

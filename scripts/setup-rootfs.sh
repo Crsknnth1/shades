@@ -63,6 +63,12 @@ bell_qml=/usr/share/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/Co
 sed -i 's/width: Kirigami.Units.iconSizes.roundedIconSize(Math.min(parent.width, parent.height))$/width: Kirigami.Units.iconSizes.small \/\/ Shades: small bell/' "$bell_qml"
 grep -q "Shades: small bell" "$bell_qml" || { echo "setup-rootfs: could not patch the notifications icon size" >&2; exit 1; }
 
+# No tab-style line over a taskbar button while its popup is open: Windows has none, and
+# Shades' own taskbar widgets highlight themselves.
+compact_qml=/usr/share/plasma/shells/org.kde.plasma.desktop/contents/applet/CompactApplet.qml
+sed -i 's/opacity: plasmoidItem \&\& plasmoidItem.expanded ? 1 : 0$/opacity: 0 \/\/ Shades: no open-popup line/' "$compact_qml"
+grep -q "Shades: no open-popup line" "$compact_qml" || { echo "setup-rootfs: could not patch CompactApplet.qml" >&2; exit 1; }
+
 # Plasma theme "shades": Breeze with solid panels and popups. Translucency without blur looks
 # muddy, and VMs (software rendering) never get blur, so Shades is opaque everywhere.
 themes=/usr/share/plasma/desktoptheme
