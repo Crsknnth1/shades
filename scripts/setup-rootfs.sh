@@ -120,11 +120,24 @@ sed -i -e 's/"Id": "default"/"Id": "shades"/' -e 's/"Name": "Breeze"/"Name": "Sh
     "$themes/shades/metadata.json"
 sed -i '/^\[ContrastEffect\]/,$d' "$themes/shades/plasmarc"
 
-# Reuse Breeze's logout, OSD, splash, and system dialog screens in the Shades global theme.
-# Copied, not symlinked: KPackage refuses files that resolve outside the theme folder.
+# Plasma loads the OSD from the shell package before the global theme, so the Shades OSD
+# goes there too.
+shell=/usr/share/plasma/shells/org.kde.plasma.desktop/contents
+cp /usr/share/plasma/look-and-feel/org.shades.desktop/contents/osd/*.qml "$shell/osd/"
+
+# Lock screen like Windows: the big clock while idle, then only the sign-in box.
+lock_qml="$shell/lockscreen/LockScreenUi.qml"
+sed -i 's/^\(\s*\)visible: y > 0 \&\& config.alwaysShowClock$/\1visible: y > 0 \&\& config.alwaysShowClock \&\& !lockScreenRoot.uiVisible \/\/ Shades: clock only while idle/' "$lock_qml"
+sed -i 's/^\(\s*\)visible: !softwareRendering \&\& config.alwaysShowClock$/\1visible: !softwareRendering \&\& config.alwaysShowClock \&\& !lockScreenRoot.uiVisible \/\/ Shades: clock shadow only while idle/' "$lock_qml"
+grep -q "Shades: clock only while idle" "$lock_qml" && grep -q "Shades: clock shadow only while idle" "$lock_qml" \
+    || { echo "setup-rootfs: could not patch LockScreenUi.qml" >&2; exit 1; }
+
+# Reuse Breeze's logout, splash, and system dialog screens in the Shades global theme
+# (Shades has its own OSD). Copied, not symlinked: KPackage refuses files that resolve
+# outside the theme folder.
 breeze=/usr/share/plasma/look-and-feel/org.kde.breeze.desktop/contents
 shades=/usr/share/plasma/look-and-feel/org.shades.desktop/contents
-for part in logout osd splash systemdialog previews; do
+for part in logout splash systemdialog previews; do
     if [ -e "$breeze/$part" ]; then
         rm -rf "${shades:?}/$part"
         cp -r "$breeze/$part" "$shades/$part"

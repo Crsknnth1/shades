@@ -1,0 +1,3 @@
+# Shut down, restart, and sign out right away, like Windows: no confirmation screen.
+[General]
+confirmLogout=false
