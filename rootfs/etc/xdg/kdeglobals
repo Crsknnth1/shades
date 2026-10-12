@@ -1,8 +1,9 @@
 [General]
-font=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-menuFont=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-toolBarFont=Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
-smallestReadableFont=Inter,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+# Selawik: Microsoft's open-source stand-in for Segoe UI, Windows' interface font.
+font=Selawik,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Selawik,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Selawik,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Selawik,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 BrowserApplication=microsoft-edge.desktop
 TerminalApplication=konsole
 
@@ -18,7 +19,7 @@ SingleClick=false
 widgetStyle=Breeze
 
 [WM]
-activeFont=Inter,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1
+activeFont=Selawik,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 
 # The taskbar is locked, like Windows'. Locked widgets then show no "Configure…" or
 # "Show Alternatives…" entries in their right-click menus.

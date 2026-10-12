@@ -58,6 +58,10 @@ clock.writeConfig("showDate", true);
 clock.writeConfig("dateDisplayFormat", "BelowTime");
 clock.writeConfig("dateFormat", "custom");
 clock.writeConfig("customDateFormat", "M/d/yyyy");
+// Small fixed-size text like Windows' clock, rather than scaled to the taskbar height.
+clock.writeConfig("autoFontAndSize", false);
+clock.writeConfig("fontFamily", "Selawik");
+clock.writeConfig("fontSize", 9);
 
 // Notifications bell to the right of the clock, as in Windows 11.
 panel.addWidget("org.kde.plasma.notifications");

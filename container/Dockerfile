@@ -7,9 +7,21 @@ FROM debian:trixie AS assets
 
 ARG FLUENT_ICONS_TAG=2026-07-27
 
+ARG SELAWIK_TAG=1.01
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        curl ca-certificates librsvg2-bin \
+        curl ca-certificates librsvg2-bin unzip \
     && rm -rf /var/lib/apt/lists/*
+
+# Selawik: Microsoft's open-source (OFL) stand-in for Segoe UI, Windows' interface font.
+RUN mkdir -p /src/selawik /out/usr/share/fonts/truetype/selawik \
+    && curl -fsSL -o /src/selawik.zip \
+        "https://github.com/microsoft/Selawik/releases/download/${SELAWIK_TAG}/Selawik_Release.zip" \
+    && unzip -q /src/selawik.zip -d /src/selawik \
+    && find /src/selawik -iname "*.ttf" -exec install -m 644 {} /out/usr/share/fonts/truetype/selawik/ \; \
+    && curl -fsSL -o /out/usr/share/fonts/truetype/selawik/LICENSE.txt \
+        "https://raw.githubusercontent.com/microsoft/Selawik/${SELAWIK_TAG}/LICENSE.txt" \
+    && ls /out/usr/share/fonts/truetype/selawik/
 
 RUN mkdir -p /src/fluent /out/usr/share/icons \
     && curl -fsSL "https://github.com/vinceliuice/Fluent-icon-theme/archive/refs/tags/${FLUENT_ICONS_TAG}.tar.gz" \
