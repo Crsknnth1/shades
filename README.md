@@ -100,9 +100,9 @@ plus Edge and ONLYOFFICE won't fit in the default 2 GB.
 - **Login screen and boot splash:** these come with the ISO, since Docker never shows them.
 - **KDE Wallet:** off by default so apps don't show a setup wizard. On the installed system,
   an auto-unlocking wallet (kwallet-pam) would protect saved passwords better.
-- **Package updates vs. patches:** `setup-rootfs.sh` patches a few KDE files in place (the
-  notifications bell size, Kickoff-free defaults). A KDE package update would undo them;
-  the ISO should reapply them with an apt hook.
+- **Package updates vs. patches:** `setup-rootfs.sh` patches one KDE file in place (the
+  notifications bell size) and copies KDE's task manager to build the taskbar. A KDE package
+  update would undo or outdate these; the ISO should rerun them with an apt hook.
 
 ## Container quirks
 
