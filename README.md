@@ -30,7 +30,17 @@ Shades ships no Microsoft logos, fonts, or wallpapers. It uses look-alikes inste
   While music or video plays, a "now playing" card with play/pause, previous, and next sits on
   top. (It works with apps that publish MPRIS, such as Spotify, VLC, Firefox, and Chrome;
   Edge for Linux doesn't.)
-- **Desktop:** a Recycle Bin icon in the top-left corner, like Windows.
+- **Desktop:** a Recycle Bin icon in the top-left corner, like Windows. Right-click gives
+  Personalize, Display settings, New, View, Paste, Undo, and Open in Terminal.
+- **Locked taskbar:** like Windows, so its right-click menus have no KDE editing entries.
+  Task buttons offer the app's jump list, Pin/Unpin from taskbar, and Close window.
+- **File Explorer:** a Windows 11 command bar (New, Cut, Copy, Paste, Rename, Delete,
+  Sort by, View), the address bar on its own row, and a navigation pane with Quick access,
+  Recycle Bin, Network, and This PC.
+- **Shades English:** a translation layer (language `en_SH`) that rewords KDE in Windows
+  terms everywhere: Recycle Bin, File Explorer (even in window titles), Settings, Delete,
+  New, Copy as path, Pin to taskbar, and so on. `scripts/shades-english.pl` holds the rules;
+  the build generates catalogs only for KDE components whose text it changes.
 - **Start menu:** Shades' own Windows 11-style menu: search on top, a "Pinned" grid with
   "All apps", "Recommended" recent files, and your account and power button along the bottom.
 - **Titlebars:** Windows 11-style, via [Klassy](https://github.com/paulmcauley/klassy): title on the

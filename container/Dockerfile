@@ -72,15 +72,16 @@ RUN bash /tmp/install-apps.sh && rm /tmp/install-apps.sh
 # Network, sound, power, and Bluetooth back-ends for Quick Settings, plus PipeWire so the
 # container has a (dummy) sound device to drive.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        plasma-nm plasma-pa powerdevil bluedevil \
+        plasma-nm plasma-pa powerdevil bluedevil kscreen \
         pipewire pipewire-pulse wireplumber \
+        gettext \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=assets /out/ /
 COPY --from=klassy /out/ /
 COPY rootfs/ /tmp/shades-rootfs/
-COPY scripts/setup-rootfs.sh /tmp/setup-rootfs.sh
-RUN bash /tmp/setup-rootfs.sh /tmp/shades-rootfs && rm -rf /tmp/shades-rootfs /tmp/setup-rootfs.sh
+COPY scripts/ /tmp/shades-scripts/
+RUN bash /tmp/shades-scripts/setup-rootfs.sh /tmp/shades-rootfs && rm -rf /tmp/shades-rootfs /tmp/shades-scripts
 
 # No systemd in a container, so Plasma must start its services itself.
 COPY container/startkderc /etc/xdg/startkderc

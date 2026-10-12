@@ -17,4 +17,9 @@ widgetStyle=Breeze
 [WM]
 activeFont=Inter,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1
 
+# The taskbar is locked, like Windows'. Locked widgets then show no "Configure…" or
+# "Show Alternatives…" entries in their right-click menus.
+[KDE Action Restrictions]
+plasma/allow_configure_when_locked=false
+
 # setup-rootfs.sh appends the ShadesLight color groups below this line.

@@ -4,3 +4,10 @@ RememberOpenedTabs=false
 ShowFullPath=false
 ShowFullPathInTitlebar=false
 ConfirmClosingMultipleTabs=false
+
+# Right-click menus closer to File Explorer's: no split-view or duplicate entries.
+[ContextMenu]
+ShowOpenInSplitView=false
+ShowDuplicateHere=false
+ShowCopyToOtherSplitView=false
+ShowMoveToOtherSplitView=false

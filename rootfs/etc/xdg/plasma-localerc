@@ -1,0 +1,4 @@
+# "Shades English" first: English with Windows wording (Recycle Bin, File Explorer,
+# Personalize...), falling back to plain US English. Built by scripts/shades-english.pl.
+[Translations]
+LANGUAGE=en_SH:en_US

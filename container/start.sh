@@ -9,6 +9,10 @@ export XDG_CURRENT_DESKTOP=KDE
 # startplasma sets this too, but kglobalacceld starts first (below) and would otherwise
 # build KDE's app cache without the Plasma menu, leaving pinned apps unresolved.
 export XDG_MENU_PREFIX=plasma-
+# Same for the language (Shades English): apps started through kglobalacceld (Win+E etc.)
+# inherit its environment, not Plasma's.
+LANGUAGE="$(kreadconfig6 --file plasma-localerc --group Translations --key LANGUAGE)"
+export LANGUAGE
 mkdir -p "$XDG_RUNTIME_DIR" && chmod 700 "$XDG_RUNTIME_DIR"
 
 # A container that was killed (e.g. by a Docker restart) leaves its X lock behind.

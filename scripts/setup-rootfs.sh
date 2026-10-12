@@ -5,9 +5,36 @@
 set -euo pipefail
 
 src="${1:?usage: setup-rootfs.sh <rootfs-dir>}"
+scripts="$(cd "$(dirname "$0")" && pwd)"
 
 cp -rT "$src" /
 chmod 755 /usr/libexec/shades/*
+
+# Shades English (language "en_SH", see /etc/xdg/plasma-localerc): an English copy of every
+# KDE catalog that mentions something Windows calls differently, reworded by
+# shades-english.pl. KDE's German catalogs are complete, so they supply the source strings.
+build_shades_english() {
+    local out=/usr/share/locale/en_SH/LC_MESSAGES count=0 mo domain tmp
+    tmp="$(mktemp -d)"
+    install -d "$out"
+    # "source=target" pairs: Shades' copies of KDE widgets use their own translation domain.
+    local aliases="plasma_applet_org.kde.plasma.taskmanager=plasma_applet_org.shades.taskbar"
+    for mo in /usr/share/locale/de/LC_MESSAGES/*.mo; do
+        domain="$(basename "$mo" .mo)"
+        msgunfmt --no-wrap "$mo" > "$tmp/de.po" 2>/dev/null || continue
+        for target in "$domain" $(echo "$aliases" | tr ' ' '\n' | sed -n "s/^$domain=//p"); do
+            if perl "$scripts/shades-english.pl" "$target" < "$tmp/de.po" > "$tmp/shades.po"; then
+                msgfmt -o "$out/$target.mo" "$tmp/shades.po"
+                count=$((count + 1))
+            fi
+        done
+    done
+    rm -rf "$tmp"
+    echo "setup-rootfs: Shades English catalogs: $count"
+    [ -f "$out/plasma_applet_org.kde.desktopcontainment.mo" ] \
+        || { echo "setup-rootfs: Shades English is missing the desktop catalog" >&2; exit 1; }
+}
+build_shades_english
 
 # KDE apps read colors from kdeglobals, not from the scheme file, so copy them in.
 cat /usr/share/color-schemes/ShadesLight.colors >> /etc/xdg/kdeglobals
@@ -56,6 +83,15 @@ perl -0pi -e 's/(\n    KSvg\.FrameSvgItem \{\n        id: frame\n)/$1        vis
 perl -0pi -e 's/(\n    Loader \{\n        id: taskProgressOverlayLoader\n)/\n    WinIndicator {\n        anchors.fill: frame\n        hovered: task.highlighted\n        active: model.IsActive === true\n        open: model.IsWindow === true\n        attention: model.IsDemandingAttention === true\n    }\n$1/' "$task_qml"
 grep -q "visible: false // Shades" "$task_qml" && grep -q "WinIndicator {" "$task_qml" \
     || { echo "setup-rootfs: could not patch the task manager's Task.qml" >&2; exit 1; }
+# Button menus: no "Configure Taskbar…" (Windows' taskbar menus have no such entry).
+menu_qml="$tb/contents/ui/ContextMenu.qml"
+sed -i 's/^\(\s*\)visible: configureAction \&\& configureAction.visible$/\1visible: false \/\/ Shades: no Configure Taskbar/' "$menu_qml"
+grep -q "Shades: no Configure Taskbar" "$menu_qml" \
+    || { echo "setup-rootfs: could not patch the task manager's ContextMenu.qml" >&2; exit 1; }
+
+# File Explorer toolbar: KXMLGUI only picks up a newer dolphinui.rc from the user's own
+# data folder, so give every new user a copy.
+install -D -m 644 /usr/share/kxmlgui5/dolphin/dolphinui.rc /etc/skel/.local/share/kxmlgui5/dolphin/dolphinui.rc
 
 # Notifications bell beside the clock: small like Windows', not scaled to the taskbar's
 # height. (The applet has a compiled part, so it's patched in place rather than copied.)

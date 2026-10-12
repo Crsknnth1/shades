@@ -72,3 +72,7 @@ for (var j = 0; j < desktopsArray.length; j++) {
     desktop.currentConfigGroup = ["Wallpaper", "org.kde.image", "General"];
     desktop.writeConfig("Image", "file:///usr/share/wallpapers/Shades/");
 }
+
+// Lock the taskbar like Windows does: no KDE editing entries in its right-click menus.
+// (The desktop's own menu is set in /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc.)
+panel.locked = true;
