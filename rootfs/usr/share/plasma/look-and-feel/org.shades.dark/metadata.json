@@ -1,0 +1,15 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Shades"
+            }
+        ],
+        "Description": "Windows 11-style desktop in dark mode",
+        "Id": "org.shades.dark",
+        "License": "GPLv2+",
+        "Name": "Shades Dark"
+    },
+    "X-Plasma-APIVersion": "2"
+}

@@ -11,6 +11,9 @@ Theme=Fluent-light
 
 [KDE]
 LookAndFeelPackage=org.shades.desktop
+# Settings' Light / Dark choice switches between the two Shades themes, like Windows' modes.
+DefaultLightLookAndFeel=org.shades.desktop
+DefaultDarkLookAndFeel=org.shades.dark
 SingleClick=false
 widgetStyle=Breeze
 

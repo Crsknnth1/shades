@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <!-- Task View: a window in front of another, like stacked desktops. -->
-  <rect x="2.5" y="6.5" width="14" height="12" rx="2" fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4"/>
+  <!-- Task View: a window in front of another, like stacked desktops. Monochrome; the
+       taskbar button tints it with the theme's text color. -->
+  <rect x="2.5" y="6.5" width="14" height="12" rx="2" fill="none" stroke="#000" stroke-width="1.5"/>
   <path d="M7.5 6.5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3"
-        fill="none" stroke="#0067c0" stroke-width="1.4" stroke-linecap="round"/>
+        fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
 </svg>

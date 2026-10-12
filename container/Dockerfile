@@ -17,12 +17,14 @@ RUN mkdir -p /src/fluent /out/usr/share/icons \
     && /src/fluent/install.sh -d /out/usr/share/icons \
     && sed -i 's/^Inherits=hicolor$/Inherits=breeze,hicolor/' /out/usr/share/icons/Fluent*/index.theme
 
-COPY artwork/wallpaper.svg /src/wallpaper.svg
-RUN mkdir -p /out/usr/share/wallpapers/Shades/contents/images \
-    && rsvg-convert -w 1920 -h 1080 /src/wallpaper.svg \
-        -o /out/usr/share/wallpapers/Shades/contents/images/1920x1080.png \
-    && rsvg-convert -w 3840 -h 2160 /src/wallpaper.svg \
-        -o /out/usr/share/wallpapers/Shades/contents/images/3840x2160.png
+COPY artwork/ /src/artwork/
+# Light and dark variants; Plasma picks images_dark/ when a dark color scheme is active.
+RUN w=/out/usr/share/wallpapers/Shades/contents \
+    && mkdir -p "$w/images" "$w/images_dark" \
+    && for size in 1920x1080 3840x2160; do \
+        rsvg-convert -w "${size%x*}" -h "${size#*x}" /src/artwork/wallpaper.svg -o "$w/images/$size.png" \
+        && rsvg-convert -w "${size%x*}" -h "${size#*x}" /src/artwork/wallpaper-dark.svg -o "$w/images_dark/$size.png"; \
+    done
 
 # --- Klassy: Breeze-based window decoration with Windows 11-style titlebar buttons ---
 FROM debian:trixie AS klassy

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- Shades dark-mode wallpaper: the same blinds, lit against a night sky. Rendered to PNG at build time. -->
+  <defs>
+    <radialGradient id="sky" cx="0.5" cy="0.55" r="0.8">
+      <stop offset="0" stop-color="#16294a"/>
+      <stop offset="0.6" stop-color="#0c1830"/>
+      <stop offset="1" stop-color="#050b18"/>
+    </radialGradient>
+    <linearGradient id="slat" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0067c0" stop-opacity="0"/>
+      <stop offset="0.25" stop-color="#1c7fd6"/>
+      <stop offset="0.6" stop-color="#4cc2ff"/>
+      <stop offset="1" stop-color="#9be0ff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="ray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-60%" width="140%" height="220%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+    <filter id="soft" x="-10%" y="-50%" width="120%" height="200%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+
+  <!-- Light rays falling between the slats -->
+  <g filter="url(#glow)" opacity="0.25">
+    <polygon points="720,330 1500,330 1700,1080 560,1080" fill="url(#ray)"/>
+  </g>
+
+  <g transform="rotate(-9 960 540)">
+    <!-- Glow behind the blinds -->
+    <g filter="url(#glow)" opacity="0.55">
+      <rect x="380" y="300" width="1160" height="56" rx="28" fill="url(#slat)"/>
+      <rect x="380" y="390" width="1160" height="56" rx="28" fill="url(#slat)"/>
+      <rect x="380" y="480" width="1160" height="56" rx="28" fill="url(#slat)"/>
+      <rect x="380" y="570" width="1160" height="56" rx="28" fill="url(#slat)"/>
+      <rect x="380" y="660" width="1160" height="56" rx="28" fill="url(#slat)"/>
+    </g>
+    <!-- The slats -->
+    <g filter="url(#soft)" opacity="0.92">
+      <rect x="380" y="300" width="1160" height="56" rx="28" fill="url(#slat)"/>
+      <rect x="400" y="390" width="1120" height="56" rx="28" fill="url(#slat)"/>
+      <rect x="420" y="480" width="1080" height="56" rx="28" fill="url(#slat)"/>
+      <rect x="440" y="570" width="1040" height="56" rx="28" fill="url(#slat)"/>
+      <rect x="460" y="660" width="1000" height="56" rx="28" fill="url(#slat)"/>
+    </g>
+    <!-- Highlight along each slat's top edge -->
+    <g fill="#ffffff" opacity="0.35">
+      <rect x="520" y="304" width="760" height="6" rx="3"/>
+      <rect x="540" y="394" width="720" height="6" rx="3"/>
+      <rect x="560" y="484" width="680" height="6" rx="3"/>
+      <rect x="580" y="574" width="640" height="6" rx="3"/>
+      <rect x="600" y="664" width="600" height="6" rx="3"/>
+    </g>
+  </g>
+</svg>

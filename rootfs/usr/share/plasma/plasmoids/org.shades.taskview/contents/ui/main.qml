@@ -58,6 +58,9 @@ PlasmoidItem {
             width: Math.round(Math.min(parent.width, parent.height) * 0.7)
             height: width
             source: "shades-taskview"
+            // Drawn in the text color, so it reads on both the light and dark taskbar.
+            isMask: true
+            color: Kirigami.Theme.textColor
         }
     }
 }

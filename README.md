@@ -43,6 +43,10 @@ Shades ships no Microsoft logos, fonts, or wallpapers. It uses look-alikes inste
 - **Volume and brightness pop-ups:** a compact Windows 11 pill (icon, thin bar, value).
 - **Lock screen:** a big clock over the wallpaper; any key or mouse move swaps it for the
   sign-in box, like Windows.
+- **Light and dark mode:** Shades and Shades Dark (Windows 11's dark greys and light-blue
+  accent, dark wallpaper variant). Settings' Light / Dark choice switches between them.
+- **Settings:** the sidebar uses Windows 11's section names (System, Bluetooth & devices,
+  Network & internet, Personalization, Apps, Accounts, Time & language, Privacy & security).
 - **Shut down, restart, sign out:** happen right away, with no KDE confirmation screen.
 - **Shades English:** a translation layer (language `en_SH`) that rewords KDE in Windows
   terms everywhere: Recycle Bin, File Explorer (even in window titles), Settings, Delete,

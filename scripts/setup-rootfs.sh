@@ -105,20 +105,55 @@ compact_qml=/usr/share/plasma/shells/org.kde.plasma.desktop/contents/applet/Comp
 sed -i 's/opacity: plasmoidItem \&\& plasmoidItem.expanded ? 1 : 0$/opacity: 0 \/\/ Shades: no open-popup line/' "$compact_qml"
 grep -q "Shades: no open-popup line" "$compact_qml" || { echo "setup-rootfs: could not patch CompactApplet.qml" >&2; exit 1; }
 
-# Plasma theme "shades": Breeze with solid panels and popups. Translucency without blur looks
-# muddy, and VMs (software rendering) never get blur, so Shades is opaque everywhere.
+# Plasma themes "shades" and "shades-dark": Breeze / Breeze Dark with solid panels and popups.
+# Translucency without blur looks muddy, and VMs (software rendering) never get blur, so
+# Shades is opaque everywhere.
 themes=/usr/share/plasma/desktoptheme
-rm -rf "$themes/shades"
-cp -r "$themes/default" "$themes/shades"
-(cd "$themes/default/solid" && find . -type f) | while read -r f; do
-    for variant in . translucent opaque; do
-        mkdir -p "$(dirname "$themes/shades/$variant/$f")"
-        cp "$themes/default/solid/$f" "$themes/shades/$variant/$f"
+make_solid_theme() {
+    local from="$1" to="$2" name="$3" from_id="$4" from_name="$5"
+    rm -rf "${themes:?}/$to"
+    cp -r "$themes/$from" "$themes/$to"
+    # Breeze Dark only overrides colors, so the solid artwork comes from Breeze itself.
+    (cd "$themes/default/solid" && find . -type f) | while read -r f; do
+        for variant in . translucent opaque; do
+            mkdir -p "$(dirname "$themes/$to/$variant/$f")"
+            cp "$themes/default/solid/$f" "$themes/$to/$variant/$f"
+        done
     done
-done
-sed -i -e 's/"Id": "default"/"Id": "shades"/' -e 's/"Name": "Breeze"/"Name": "Shades"/' \
-    "$themes/shades/metadata.json"
-sed -i '/^\[ContrastEffect\]/,$d' "$themes/shades/plasmarc"
+    sed -i -e "s/\"Id\": \"$from_id\"/\"Id\": \"$to\"/" -e "s/\"Name\": \"$from_name\"/\"Name\": \"$name\"/" \
+        "$themes/$to/metadata.json"
+    [ -f "$themes/$to/plasmarc" ] && sed -i '/^\[ContrastEffect\]/,$d' "$themes/$to/plasmarc"
+    grep -q "\"Id\": \"$to\"" "$themes/$to/metadata.json" \
+        || { echo "setup-rootfs: could not create Plasma theme $to" >&2; exit 1; }
+}
+make_solid_theme default shades "Shades" default "Breeze"
+make_solid_theme breeze-dark shades-dark "Shades Dark" breeze-dark "Breeze Dark"
+
+# Settings' sidebar sections in Windows 11 terms (Shades English names in the category files).
+name_category() {
+    local file="/usr/share/systemsettings/categories/$1.desktop" name="$2"
+    [ -f "$file" ] || return 0
+    sed -i '/^Name\[en_SH\]=/d' "$file"
+    # "&" means "the matched text" in a sed replacement, so escape it in names like "Bluetooth & devices".
+    sed -i "0,/^Name=.*/s//&\nName[en_SH]=${name//&/\\&}/" "$file"
+}
+name_category settings-appearance "Personalization"
+name_category settings-applications "Apps"
+name_category settings-applications-defaults "Default apps"
+name_category settings-hardware "Bluetooth & devices"
+name_category settings-hardware-input "System"
+name_category settings-hardware-display "Display"
+name_category settings-hardware-input-pointing-devices "Mouse"
+name_category settings-hardware-removable-storage "Storage & cameras"
+name_category settings-network "Network & internet"
+name_category settings-network-networksettings "Wi-Fi"
+name_category settings-personalization "Accounts"
+name_category settings-regionalsettings "Time & language"
+name_category settings-security-privacy "Privacy & security"
+name_category settings-system-administration "About & updates"
+name_category settings-workspace "Taskbar & desktop"
+name_category settings-appearance-themes "Themes"
+name_category settings-appearance-font "Fonts"
 
 # Plasma loads the OSD from the shell package before the global theme, so the Shades OSD
 # goes there too.
@@ -137,9 +172,17 @@ grep -q "Shades: clock only while idle" "$lock_qml" && grep -q "Shades: clock sh
 # outside the theme folder.
 breeze=/usr/share/plasma/look-and-feel/org.kde.breeze.desktop/contents
 shades=/usr/share/plasma/look-and-feel/org.shades.desktop/contents
-for part in logout splash systemdialog previews; do
+for part in logout splash systemdialog; do
     if [ -e "$breeze/$part" ]; then
         rm -rf "${shades:?}/$part"
         cp -r "$breeze/$part" "$shades/$part"
     fi
+done
+
+# Shades Dark global theme: same layout and screens as Shades (each theme ships its own
+# preview screenshots).
+dark=/usr/share/plasma/look-and-feel/org.shades.dark/contents
+for part in layouts osd logout splash systemdialog; do
+    rm -rf "${dark:?}/$part"
+    cp -r "$shades/$part" "$dark/$part"
 done
