@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Shades"
+            }
+        ],
+        "Category": "Application Launchers",
+        "Description": "Opens the Windows-style power-user menu with Win+X (takes no space on the taskbar)",
+        "EnabledByDefault": true,
+        "Icon": "system-run",
+        "Id": "org.shades.winx",
+        "License": "GPL-2.0+",
+        "Name": "Win+X Menu"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

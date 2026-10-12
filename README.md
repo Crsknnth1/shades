@@ -37,7 +37,7 @@ Shades ships no Microsoft logos, fonts, or wallpapers. It uses look-alikes inste
 - **File Explorer:** a Windows 11 command bar (New, Cut, Copy, Paste, Rename, Delete,
   Sort by, View), the address bar on its own row, and a navigation pane with Quick access,
   Recycle Bin, Network, and This PC.
-- **Win+X menu:** right-click Start for Power Options, System, Network Connections,
+- **Win+X menu:** press Win+X or right-click Start for Power Options, System, Network Connections,
   Terminal, Task Manager, Settings, File Explorer, Search, Run, sign out / sleep / shut down
   / restart, and Desktop.
 - **Volume and brightness pop-ups:** a compact Windows 11 pill (icon, thin bar, value).

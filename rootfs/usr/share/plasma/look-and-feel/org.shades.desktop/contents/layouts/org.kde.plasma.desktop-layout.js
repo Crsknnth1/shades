@@ -11,6 +11,9 @@ panel.addWidget("org.kde.plasma.panelspacer");
 // Windows 11 order: Start, Search, Task View, then pinned and open apps.
 // Start's pinned apps are in its config/main.xml.
 panel.addWidget("org.shades.startmenu");
+// Invisible: opens the power-user menu beside Start on Win+X.
+var winx = panel.addWidget("org.shades.winx");
+winx.globalShortcut = "Meta+X";
 panel.addWidget("org.shades.search");
 panel.addWidget("org.shades.taskview");
 

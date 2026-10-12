@@ -8,7 +8,6 @@
 */
 import QtQuick
 import QtQuick.Layouts
-import QtQml.Models
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PC3
@@ -18,8 +17,7 @@ import org.kde.plasma.private.sessions as Sessions
 import org.kde.coreaddons as KCoreAddons
 import org.kde.kcmutils as KCM
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.plasma5support as P5Support
-import org.kde.plasma.private.showdesktop
+import "file:///usr/share/shades/qml" as Shades
 
 PlasmoidItem {
     id: root
@@ -102,131 +100,12 @@ PlasmoidItem {
     }
     //END
 
-    //BEGIN Right-click menu: Windows' "Win+X" power-user menu
-    P5Support.DataSource {
-        id: launcher
-        engine: "executable"
-        onNewData: sourceName => disconnectSource(sourceName)
-        function run(command) {
-            connectSource(command);
-        }
+    // Right-click menu: Windows' "Win+X" power-user menu (shared with the Win+X widget).
+    // The Start button opens it itself: Plasma shows no widget menus on a locked taskbar.
+    Shades.WinXMenu {
+        id: winx
+        openSearch: () => root.expanded = true
     }
-
-    ShowDesktop {
-        id: showDesktop
-    }
-
-    // Shown by the Start button itself on right-click: Plasma doesn't show widgets' own
-    // menus on a locked taskbar.
-    function openWinXMenu(visualParent) {
-        winxMenu.visualParent = visualParent;
-        winxMenu.openRelative();
-    }
-
-    PlasmaExtras.Menu {
-        id: winxMenu
-        placement: PlasmaExtras.Menu.TopPosedLeftAlignedPopup
-    }
-
-    Instantiator {
-        model: root.winxActions
-        delegate: PlasmaExtras.MenuItem {
-            required property var modelData
-            text: modelData.text
-            icon: modelData.icon.name
-            separator: modelData.isSeparator
-            enabled: modelData.enabled
-            onClicked: modelData.trigger()
-        }
-        onObjectAdded: (index, object) => winxMenu.addMenuItem(object)
-    }
-
-    readonly property list<PlasmaCore.Action> winxActions: [
-        PlasmaCore.Action {
-            text: i18n("Power Options")
-            icon.name: "preferences-system-power-management"
-            onTriggered: KCM.KCMLauncher.openSystemSettings("kcm_powerdevilprofilesconfig")
-        },
-        PlasmaCore.Action {
-            text: i18n("System")
-            icon.name: "computer"
-            onTriggered: KCM.KCMLauncher.openSystemSettings("kcm_about-distro")
-        },
-        PlasmaCore.Action {
-            text: i18n("Network Connections")
-            icon.name: "network-wired"
-            onTriggered: KCM.KCMLauncher.openSystemSettings("kcm_networkmanagement")
-        },
-        PlasmaCore.Action {
-            isSeparator: true
-        },
-        PlasmaCore.Action {
-            text: i18n("Terminal")
-            icon.name: "utilities-terminal"
-            onTriggered: launcher.run("konsole")
-        },
-        PlasmaCore.Action {
-            text: i18n("Task Manager")
-            icon.name: "utilities-system-monitor"
-            onTriggered: launcher.run("plasma-systemmonitor")
-        },
-        PlasmaCore.Action {
-            text: i18n("Settings")
-            icon.name: "preferences-system"
-            onTriggered: launcher.run("systemsettings")
-        },
-        PlasmaCore.Action {
-            text: i18n("File Explorer")
-            icon.name: "system-file-manager"
-            onTriggered: launcher.run("dolphin")
-        },
-        PlasmaCore.Action {
-            text: i18n("Search")
-            icon.name: "search"
-            onTriggered: root.expanded = true
-        },
-        PlasmaCore.Action {
-            text: i18n("Run")
-            icon.name: "system-run"
-            onTriggered: launcher.run("krunner")
-        },
-        PlasmaCore.Action {
-            isSeparator: true
-        },
-        PlasmaCore.Action {
-            text: i18n("Sign out")
-            icon.name: "system-log-out"
-            enabled: session.canLogout
-            onTriggered: session.requestLogout()
-        },
-        PlasmaCore.Action {
-            text: i18n("Sleep")
-            icon.name: "system-suspend"
-            enabled: session.canSuspend
-            onTriggered: session.suspend()
-        },
-        PlasmaCore.Action {
-            text: i18n("Shut down")
-            icon.name: "system-shutdown"
-            enabled: session.canShutdown
-            onTriggered: session.requestShutdown()
-        },
-        PlasmaCore.Action {
-            text: i18n("Restart")
-            icon.name: "system-reboot"
-            enabled: session.canReboot
-            onTriggered: session.requestReboot()
-        },
-        PlasmaCore.Action {
-            isSeparator: true
-        },
-        PlasmaCore.Action {
-            text: i18n("Desktop")
-            icon.name: "user-desktop"
-            onTriggered: showDesktop.toggleDesktop()
-        }
-    ]
-    //END
 
     compactRepresentation: MouseArea {
         id: compactRoot
@@ -240,7 +119,7 @@ PlasmoidItem {
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         onClicked: mouse => {
             if (mouse.button === Qt.RightButton) {
-                root.openWinXMenu(compactRoot);
+                winx.open(compactRoot);
             } else {
                 root.expanded = !root.expanded;
             }
