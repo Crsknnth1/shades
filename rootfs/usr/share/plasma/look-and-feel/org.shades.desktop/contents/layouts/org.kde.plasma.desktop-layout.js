@@ -23,7 +23,34 @@ tasks.writeConfig("launchers", [
 ]);
 
 panel.addWidget("org.kde.plasma.panelspacer");
-panel.addWidget("org.kde.plasma.systemtray");
+
+// System tray without the items Shades shows elsewhere, like Windows: network, volume,
+// battery, brightness, and Bluetooth are in Quick Settings; notifications sit by the clock.
+// Marking them "known" stops the tray from adding them on its own.
+var systray = panel.addWidget("org.kde.plasma.systemtray");
+systray.currentConfigGroup = [];
+var tray = desktopById(systray.readConfig("SystrayContainmentId"));
+if (tray) {
+    tray.currentConfigGroup = ["General"];
+    tray.writeConfig("knownItems", [
+        "org.kde.plasma.networkmanagement",
+        "org.kde.plasma.volume",
+        "org.kde.plasma.battery",
+        "org.kde.plasma.brightness",
+        "org.kde.plasma.bluetooth",
+        "org.kde.plasma.notifications",
+    ]);
+    tray.writeConfig("extraItems", [
+        "org.kde.plasma.clipboard",
+        "org.kde.plasma.devicenotifier",
+        "org.kde.plasma.keyboardlayout",
+        "org.kde.plasma.cameraindicator",
+    ]);
+    // Clipboard history is still on Win+V; its icon goes under the "^", like Windows.
+    tray.writeConfig("hiddenItems", ["org.kde.plasma.clipboard"]);
+}
+
+panel.addWidget("org.shades.quicksettings");
 
 var clock = panel.addWidget("org.kde.plasma.digitalclock");
 clock.currentConfigGroup = ["Appearance"];
@@ -31,6 +58,9 @@ clock.writeConfig("showDate", true);
 clock.writeConfig("dateDisplayFormat", "BelowTime");
 clock.writeConfig("dateFormat", "custom");
 clock.writeConfig("customDateFormat", "M/d/yyyy");
+
+// Notifications bell to the right of the clock, as in Windows 11.
+panel.addWidget("org.kde.plasma.notifications");
 
 // Thin "show desktop" strip at the far right, like Windows.
 panel.addWidget("org.shades.showdesktop");

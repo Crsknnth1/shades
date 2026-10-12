@@ -69,6 +69,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY scripts/install-apps.sh /tmp/install-apps.sh
 RUN bash /tmp/install-apps.sh && rm /tmp/install-apps.sh
 
+# Network, sound, power, and Bluetooth back-ends for Quick Settings, plus PipeWire so the
+# container has a (dummy) sound device to drive.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        plasma-nm plasma-pa powerdevil bluedevil \
+        pipewire pipewire-pulse wireplumber \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY --from=assets /out/ /
 COPY --from=klassy /out/ /
 COPY rootfs/ /tmp/shades-rootfs/

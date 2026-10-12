@@ -20,8 +20,13 @@ Shades ships no Microsoft logos, fonts, or wallpapers. It uses look-alikes inste
 
 - **Taskbar:** Windows 11 layout: centered Start, Search box, Task View, then pinned apps
   (File Explorer, Edge, ONLYOFFICE). Open apps get a small pill under the icon (a longer
-  blue one for the active window) and a soft rounded tile on hover. Tray, clock with
-  `M/d/yyyy` date, and a thin "show desktop" strip on the right.
+  blue one for the active window) and a soft rounded tile on hover. On the right: the
+  tray ("^"), Quick Settings, the clock with an `M/d/yyyy` date, the notifications bell,
+  and a thin "show desktop" strip.
+- **Quick Settings:** one button with the network, volume, and battery icons, like
+  Windows 11. It opens tiles for Wi-Fi, Bluetooth, Airplane mode, and Battery saver (each
+  only on hardware that has it) plus Do not disturb, brightness and volume sliders, and the
+  battery level with a Settings shortcut. Scroll over the button to change the volume.
 - **Start menu:** Shades' own Windows 11-style menu: search on top, a "Pinned" grid with
   "All apps", "Recommended" recent files, and your account and power button along the bottom.
 - **Titlebars:** Windows 11-style, via [Klassy](https://github.com/paulmcauley/klassy): title on the
@@ -95,7 +100,9 @@ plus Edge and ONLYOFFICE won't fit in the default 2 GB.
 - **Login screen and boot splash:** these come with the ISO, since Docker never shows them.
 - **KDE Wallet:** off by default so apps don't show a setup wizard. On the installed system,
   an auto-unlocking wallet (kwallet-pam) would protect saved passwords better.
-- **Audio and volume:** add PipeWire and the volume applet in the ISO.
+- **Package updates vs. patches:** `setup-rootfs.sh` patches a few KDE files in place (the
+  notifications bell size, Kickoff-free defaults). A KDE package update would undo them;
+  the ISO should reapply them with an apt hook.
 
 ## Container quirks
 

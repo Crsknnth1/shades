@@ -57,6 +57,12 @@ perl -0pi -e 's/(\n    Loader \{\n        id: taskProgressOverlayLoader\n)/\n   
 grep -q "visible: false // Shades" "$task_qml" && grep -q "WinIndicator {" "$task_qml" \
     || { echo "setup-rootfs: could not patch the task manager's Task.qml" >&2; exit 1; }
 
+# Notifications bell beside the clock: small like Windows', not scaled to the taskbar's
+# height. (The applet has a compiled part, so it's patched in place rather than copied.)
+bell_qml=/usr/share/plasma/plasmoids/org.kde.plasma.notifications/contents/ui/CompactRepresentation.qml
+sed -i 's/width: Kirigami.Units.iconSizes.roundedIconSize(Math.min(parent.width, parent.height))$/width: Kirigami.Units.iconSizes.small \/\/ Shades: small bell/' "$bell_qml"
+grep -q "Shades: small bell" "$bell_qml" || { echo "setup-rootfs: could not patch the notifications icon size" >&2; exit 1; }
+
 # Plasma theme "shades": Breeze with solid panels and popups. Translucency without blur looks
 # muddy, and VMs (software rendering) never get blur, so Shades is opaque everywhere.
 themes=/usr/share/plasma/desktoptheme

@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Shades"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Windows 11-style Quick Settings: network, volume, and battery in one button",
+        "EnabledByDefault": true,
+        "Icon": "preferences-system",
+        "Id": "org.shades.quicksettings",
+        "License": "GPL-2.0+",
+        "Name": "Quick Settings"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

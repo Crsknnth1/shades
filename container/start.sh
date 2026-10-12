@@ -25,6 +25,9 @@ for _ in $(seq 50); do xdpyinfo >/dev/null 2>&1 && break; sleep 0.2; done
 # Without systemd nothing can launch kglobalacceld on demand, so start it before KWin
 # registers its shortcuts; otherwise every KWin shortcut ends up unbound.
 exec dbus-run-session bash -c '
+    # Sound server (systemd starts these on the real distro). With no sound hardware,
+    # PipeWire provides a dummy output so the volume controls have something to drive.
+    pipewire & sleep 0.5; wireplumber & pipewire-pulse &
     /usr/lib/x86_64-linux-gnu/libexec/kglobalacceld &
     for _ in $(seq 50); do
         dbus-send --session --print-reply --dest=org.freedesktop.DBus / \
