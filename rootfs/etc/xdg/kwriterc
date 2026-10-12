@@ -1,0 +1,23 @@
+# Notepad (KWrite) as plain as Windows Notepad: no line numbers, gutter, or minimap;
+# word wrap on; a simple status bar.
+
+[KTextEditor View]
+Line Numbers=false
+Icon Bar=false
+Folding Bar=false
+Line Modification=false
+Scroll Bar Marks=false
+Scroll Bar MiniMap=false
+Scroll Bar Preview=false
+Dynamic Word Wrap=true
+Dynamic Word Wrap Indicators=0
+Show Statusbar Line Column=true
+Show Statusbar Dictionary=false
+Show Statusbar Input Mode=false
+Show Statusbar Highlighting Mode=false
+Show Statusbar Tab Settings=false
+
+[KTextEditor Renderer]
+Show Indentation Lines=false
+Show Whole Bracket Expression=false
+Animate Bracket Matching=false

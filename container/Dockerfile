@@ -91,6 +91,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         gettext \
     && rm -rf /var/lib/apt/lists/*
 
+# Everyday apps in Windows' roles (renamed by setup-rootfs.sh): Notepad, Photos, Calculator,
+# Paint, Media Player, plus zip support and thumbnails in File Explorer.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        kwrite gwenview kcalc kolourpaint haruna ark kio-extras \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY --from=assets /out/ /
 COPY --from=klassy /out/ /
 COPY rootfs/ /tmp/shades-rootfs/

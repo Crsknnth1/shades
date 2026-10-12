@@ -52,6 +52,11 @@ rename_app org.kde.konsole.desktop "Terminal"
 rename_app org.kde.plasma-systemmonitor.desktop "Task Manager"
 rename_app org.kde.spectacle.desktop "Screenshot"
 rename_app systemsettings.desktop "Settings"
+rename_app org.kde.kwrite.desktop "Notepad"
+rename_app org.kde.gwenview.desktop "Photos"
+rename_app org.kde.kcalc.desktop "Calculator"
+rename_app org.kde.kolourpaint.desktop "Paint"
+rename_app org.kde.haruna.desktop "Media Player"
 
 # Keep the Start menu to what Windows would show.
 hide_app() {
@@ -66,6 +71,9 @@ hide_app klassy-settings.desktop               # titlebar tuning; Settings cover
 hide_app org.kde.drkonqi.coredump.gui.desktop  # crash viewer
 hide_app org.kde.plasma.emojier.desktop        # still on Win+. via its shortcut
 hide_app display-im7.q16.desktop               # ImageMagick (container screenshot tool)
+hide_app org.kde.kate.desktop                  # comes with Notepad (KWrite)
+hide_app org.kde.gwenview_importer.desktop     # Photos' camera importer
+hide_app org.kde.ark.desktop                   # zip files open in File Explorer
 
 # Taskbar "org.shades.taskbar": Plasma's icons-only task manager with Windows 11-style
 # buttons (rounded tile + pill, see /usr/share/shades/taskbar/WinIndicator.qml) in place

@@ -10,7 +10,8 @@
     </entry>
     <!-- Pinned apps on first use; after that they live in KDE's activity database. -->
     <entry name="favorites" type="StringList">
-      <default>microsoft-edge.desktop,org.kde.dolphin.desktop,onlyoffice-desktopeditors.desktop,shades-word-web.desktop,shades-excel-web.desktop,shades-powerpoint-web.desktop,shades-outlook-web.desktop,systemsettings.desktop,org.kde.konsole.desktop,org.kde.plasma-systemmonitor.desktop,org.kde.spectacle.desktop</default>
+      <!-- Roughly Windows 11's default pins, with Shades' equivalents. -->
+      <default>microsoft-edge.desktop,shades-word-web.desktop,shades-excel-web.desktop,shades-powerpoint-web.desktop,shades-outlook-web.desktop,onlyoffice-desktopeditors.desktop,org.kde.gwenview.desktop,systemsettings.desktop,org.kde.kcalc.desktop,org.kde.kwrite.desktop,org.kde.kolourpaint.desktop,org.kde.dolphin.desktop,org.kde.haruna.desktop,org.kde.spectacle.desktop,org.kde.konsole.desktop,org.kde.plasma-systemmonitor.desktop</default>
     </entry>
     <entry name="favoritesPortedToKAstats" type="Bool">
       <default>false</default>
