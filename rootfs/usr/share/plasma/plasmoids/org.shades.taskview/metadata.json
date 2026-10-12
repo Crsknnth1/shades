@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Shades"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Windows 11-style Task View button (KWin Overview)",
+        "EnabledByDefault": true,
+        "Icon": "shades-taskview",
+        "Id": "org.shades.taskview",
+        "License": "GPL-2.0+",
+        "Name": "Task View"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

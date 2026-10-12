@@ -18,8 +18,10 @@ Shades ships no Microsoft logos, fonts, or wallpapers. It uses look-alikes inste
 
 ## What it looks like
 
-- **Taskbar:** centered Start button and pinned apps (File Explorer, Edge, ONLYOFFICE),
-  tray and clock on the right, flush to the bottom.
+- **Taskbar:** Windows 11 layout: centered Start, Search box, Task View, then pinned apps
+  (File Explorer, Edge, ONLYOFFICE). Open apps get a small pill under the icon (a longer
+  blue one for the active window) and a soft rounded tile on hover. Tray, clock with
+  `M/d/yyyy` date, and a thin "show desktop" strip on the right.
 - **Start menu:** Shades' own Windows 11-style menu: search on top, a "Pinned" grid with
   "All apps", "Recommended" recent files, and your account and power button along the bottom.
 - **Titlebars:** Windows 11-style, via [Klassy](https://github.com/paulmcauley/klassy): title on the

@@ -1,0 +1,25 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Shades"
+            },
+            {
+                "Email": "hein@kde.org",
+                "Name": "Eike Hein"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Windows 11-style taskbar: pinned and open apps with tile and pill indicators",
+        "EnabledByDefault": true,
+        "Icon": "preferences-system-windows",
+        "Id": "org.shades.taskbar",
+        "License": "GPL-2.0+",
+        "Name": "Taskbar"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.multitasking"
+    ]
+}

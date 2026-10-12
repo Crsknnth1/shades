@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Shades"
+            }
+        ],
+        "Category": "Application Launchers",
+        "Description": "Windows 11-style search box on the taskbar; opens Start with search",
+        "EnabledByDefault": true,
+        "Icon": "search",
+        "Id": "org.shades.search",
+        "License": "GPL-2.0+",
+        "Name": "Search"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

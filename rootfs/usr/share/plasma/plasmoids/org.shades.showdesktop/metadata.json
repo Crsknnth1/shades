@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Shades"
+            }
+        ],
+        "Category": "Windows and Tasks",
+        "Description": "Windows 11-style show desktop strip at the end of the taskbar",
+        "EnabledByDefault": true,
+        "Icon": "user-desktop",
+        "Id": "org.shades.showdesktop",
+        "License": "GPL-2.0+",
+        "Name": "Show Desktop Strip"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

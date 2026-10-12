@@ -8,10 +8,13 @@ panel.floating = false;
 
 panel.addWidget("org.kde.plasma.panelspacer");
 
-// Shades' own Windows 11-style Start menu (pinned apps are in its config/main.xml).
+// Windows 11 order: Start, Search, Task View, then pinned and open apps.
+// Start's pinned apps are in its config/main.xml.
 panel.addWidget("org.shades.startmenu");
+panel.addWidget("org.shades.search");
+panel.addWidget("org.shades.taskview");
 
-var tasks = panel.addWidget("org.kde.plasma.icontasks");
+var tasks = panel.addWidget("org.shades.taskbar");
 tasks.currentConfigGroup = ["General"];
 tasks.writeConfig("launchers", [
     "applications:org.kde.dolphin.desktop",
@@ -26,9 +29,11 @@ var clock = panel.addWidget("org.kde.plasma.digitalclock");
 clock.currentConfigGroup = ["Appearance"];
 clock.writeConfig("showDate", true);
 clock.writeConfig("dateDisplayFormat", "BelowTime");
-clock.writeConfig("dateFormat", "shortDate");
+clock.writeConfig("dateFormat", "custom");
+clock.writeConfig("customDateFormat", "M/d/yyyy");
 
-panel.addWidget("org.kde.plasma.showdesktop");
+// Thin "show desktop" strip at the far right, like Windows.
+panel.addWidget("org.shades.showdesktop");
 
 var desktopsArray = desktopsForActivity(currentActivity());
 for (var j = 0; j < desktopsArray.length; j++) {

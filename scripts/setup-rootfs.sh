@@ -40,6 +40,23 @@ hide_app org.kde.drkonqi.coredump.gui.desktop  # crash viewer
 hide_app org.kde.plasma.emojier.desktop        # still on Win+. via its shortcut
 hide_app display-im7.q16.desktop               # ImageMagick (container screenshot tool)
 
+# Taskbar "org.shades.taskbar": Plasma's icons-only task manager with Windows 11-style
+# buttons (rounded tile + pill, see /usr/share/shades/taskbar/WinIndicator.qml) in place
+# of its frame, and without the "+" badge on grouped windows.
+tm=/usr/share/plasma/plasmoids/org.kde.plasma.taskmanager
+tb=/usr/share/plasma/plasmoids/org.shades.taskbar
+rm -rf "$tb"
+cp -r "$tm" "$tb"
+cp /usr/share/shades/taskbar/metadata.json "$tb/metadata.json"
+cp /usr/share/shades/taskbar/WinIndicator.qml "$tb/contents/ui/WinIndicator.qml"
+printf 'import QtQuick\nItem {}\n' > "$tb/contents/ui/GroupExpanderOverlay.qml"
+grep -rl '"org.kde.plasma.icontasks"' "$tb/contents" | xargs sed -i 's/"org.kde.plasma.icontasks"/"org.shades.taskbar"/g'
+task_qml="$tb/contents/ui/Task.qml"
+perl -0pi -e 's/(\n    KSvg\.FrameSvgItem \{\n        id: frame\n)/$1        visible: false \/\/ Shades: WinIndicator draws the button\n/' "$task_qml"
+perl -0pi -e 's/(\n    Loader \{\n        id: taskProgressOverlayLoader\n)/\n    WinIndicator {\n        anchors.fill: frame\n        hovered: task.highlighted\n        active: model.IsActive === true\n        open: model.IsWindow === true\n        attention: model.IsDemandingAttention === true\n    }\n$1/' "$task_qml"
+grep -q "visible: false // Shades" "$task_qml" && grep -q "WinIndicator {" "$task_qml" \
+    || { echo "setup-rootfs: could not patch the task manager's Task.qml" >&2; exit 1; }
+
 # Plasma theme "shades": Breeze with solid panels and popups. Translucency without blur looks
 # muddy, and VMs (software rendering) never get blur, so Shades is opaque everywhere.
 themes=/usr/share/plasma/desktoptheme
