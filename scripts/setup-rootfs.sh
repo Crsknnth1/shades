@@ -105,6 +105,26 @@ compact_qml=/usr/share/plasma/shells/org.kde.plasma.desktop/contents/applet/Comp
 sed -i 's/opacity: plasmoidItem \&\& plasmoidItem.expanded ? 1 : 0$/opacity: 0 \/\/ Shades: no open-popup line/' "$compact_qml"
 grep -q "Shades: no open-popup line" "$compact_qml" || { echo "setup-rootfs: could not patch CompactApplet.qml" >&2; exit 1; }
 
+# Clock calendar like Windows 11's: "October 2026" heading with up/down arrows, no
+# Days/Months/Years tabs, and today as a filled accent circle. The calendar module normally
+# loads its compiled-in QML ("prefer :/..."); dropping that line makes it use (and lets us
+# patch) the identical files on disk.
+cal=/usr/lib/x86_64-linux-gnu/qt6/qml/org/kde/plasma/workspace/calendar
+sed -i '/^prefer :\//d' "$cal/qmldir"
+perl -0pi -e 's/(\n(\s*)id: tabBar\n)/$1$2visible: false \/\/ Shades: no Days\/Months\/Years tabs\n/' "$cal/MonthViewHeader.qml"
+perl -0pi -e 's/text: root\.swipeView\.currentIndex > 0 \|\| root\.monthViewRoot\.selectedYear !== today\.getFullYear\(\)/text: true \/\/ Shades: always "Month Year"\n/' "$cal/MonthViewHeader.qml"
+perl -0pi -e 's/active: today \|\| selected \|\| dayStyle\.hovered \|\| dayStyle\.activeFocus/active: !today \&\& (selected || dayStyle.hovered || dayStyle.activeFocus) \/\/ Shades: today drawn below/' "$cal/DayDelegate.qml"
+perl -0pi -e 's/(\n    contentItem: Item \{\n)/\n    \/\/ Shades: today as a filled accent circle, like Windows 11\x27s calendar.\n    Rectangle {\n        visible: dayStyle.today\n        anchors.centerIn: parent\n        width: Math.min(parent.width, parent.height) * 0.8\n        height: width\n        radius: width \/ 2\n        color: Kirigami.Theme.highlightColor\n        z: -1\n    }\n$1/' "$cal/DayDelegate.qml"
+perl -0pi -e 's/(\n(\s*)id: label\n)/$1$2color: dayStyle.today ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor \/\/ Shades\n/' "$cal/DayDelegate.qml"
+perl -0pi -e 's/(sourceComponent: dateAndPin\n\s*)active: root\.isDigitalClock/${1}active: false \/\/ Shades: no settings or pin buttons/' "$cal/MonthViewHeader.qml"
+for check in "Shades: no Days" "Shades: always" "Shades: no settings or pin"; do
+    grep -q "$check" "$cal/MonthViewHeader.qml" || { echo "setup-rootfs: could not patch MonthViewHeader.qml ($check)" >&2; exit 1; }
+done
+for check in "Shades: today drawn below" "Shades: today as a filled" "highlightedTextColor : Kirigami.Theme.textColor // Shades"; do
+    grep -q "$check" "$cal/DayDelegate.qml" || { echo "setup-rootfs: could not patch DayDelegate.qml ($check)" >&2; exit 1; }
+done
+! grep -q "^prefer " "$cal/qmldir" || { echo "setup-rootfs: could not patch the calendar qmldir" >&2; exit 1; }
+
 # Plasma themes "shades" and "shades-dark": Breeze / Breeze Dark with solid panels and popups.
 # Translucency without blur looks muddy, and VMs (software rendering) never get blur, so
 # Shades is opaque everywhere.

@@ -17,6 +17,6 @@ ButtonsOnRight=IAX
 library=org.kde.klassy
 theme=Klassy
 
-# Alt+Tab shows a grid of window thumbnails.
+# Alt+Tab: Shades' Windows 11-style switcher (/usr/share/kwin/tabbox/shades).
 [TabBox]
-LayoutName=thumbnail_grid
+LayoutName=shades

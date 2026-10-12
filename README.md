@@ -43,6 +43,10 @@ Shades ships no Microsoft logos, fonts, or wallpapers. It uses look-alikes inste
 - **Volume and brightness pop-ups:** a compact Windows 11 pill (icon, thin bar, value).
 - **Lock screen:** a big clock over the wallpaper; any key or mouse move swaps it for the
   sign-in box, like Windows.
+- **Calendar:** clicking the clock opens a Windows 11-style month view ("October 2026",
+  today as a filled accent circle, no KDE tabs or buttons).
+- **Alt+Tab:** window thumbnails with the app icon and title above each, the selected one
+  outlined, like Windows 11.
 - **Light and dark mode:** Shades and Shades Dark (Windows 11's dark greys and light-blue
   accent, dark wallpaper variant). Settings' Light / Dark choice switches between them.
 - **Settings:** the sidebar uses Windows 11's section names (System, Bluetooth & devices,

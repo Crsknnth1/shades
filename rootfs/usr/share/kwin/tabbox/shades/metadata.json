@@ -1,0 +1,15 @@
+{
+    "KPackageStructure": "KWin/WindowSwitcher",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Shades"
+            }
+        ],
+        "Description": "Windows 11-style Alt+Tab: window thumbnails with their icon and title above, selected one outlined",
+        "Id": "shades",
+        "License": "GPL-2.0+",
+        "Name": "Shades"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
