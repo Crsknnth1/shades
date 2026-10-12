@@ -86,7 +86,7 @@ RUN bash /tmp/install-apps.sh && rm /tmp/install-apps.sh
 # Network, sound, power, and Bluetooth back-ends for Quick Settings, plus PipeWire so the
 # container has a (dummy) sound device to drive.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        plasma-nm plasma-pa powerdevil bluedevil kscreen kinfocenter \
+        plasma-nm plasma-pa powerdevil bluedevil kscreen kinfocenter sddm \
         pipewire pipewire-pulse wireplumber \
         gettext \
     && rm -rf /var/lib/apt/lists/*
