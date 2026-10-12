@@ -77,6 +77,7 @@ RUN bash /tmp/setup-rootfs.sh /tmp/shades-rootfs && rm -rf /tmp/shades-rootfs /t
 
 # No systemd in a container, so Plasma must start its services itself.
 COPY container/startkderc /etc/xdg/startkderc
+COPY container/kscreenlockerrc /etc/xdg/kscreenlockerrc
 
 # Desktop user. No password; passwordless sudo for tinkering inside the container.
 RUN useradd -m -s /bin/bash shades \

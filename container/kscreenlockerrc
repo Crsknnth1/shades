@@ -1,0 +1,4 @@
+# Container only: the desktop user has no password, so a locked screen could never be unlocked.
+[Daemon]
+Autolock=false
+LockOnResume=false
