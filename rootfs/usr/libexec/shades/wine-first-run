@@ -1,0 +1,6 @@
+#!/bin/sh
+# Sets up the Windows app layer (~/.wine) quietly in the background at first login,
+# so the first .exe a user opens starts right away instead of pausing for setup.
+[ -d "$HOME/.wine" ] && exit 0
+# No display, so Wine's "configuration is being updated" window doesn't pop up.
+WINEDEBUG=-all exec env -u DISPLAY -u WAYLAND_DISPLAY nice -n 10 wineboot --init

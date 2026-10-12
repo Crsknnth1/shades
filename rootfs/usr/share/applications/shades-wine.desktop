@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Windows Program Loader
+Comment=Run Windows programs and installers with Wine
+Exec=wine start /unix %f
+Icon=wine
+Terminal=false
+NoDisplay=true
+MimeType=application/x-ms-dos-executable;application/vnd.microsoft.portable-executable;application/x-msdownload;application/x-msi;application/x-ms-shortcut;application/x-wine-extension-msp;

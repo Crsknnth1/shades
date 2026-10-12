@@ -1,0 +1,17 @@
+{
+    "HideFirstRunExperience": true,
+    "DiagnosticData": 0,
+    "PersonalizationReportingEnabled": false,
+    "SpotlightExperiencesAndRecommendationsEnabled": false,
+    "ShowRecommendationsEnabled": false,
+    "EdgeShoppingAssistantEnabled": false,
+    "ShowMicrosoftRewards": false,
+    "HubsSidebarEnabled": false,
+    "Microsoft365CopilotChatIconEnabled": false,
+    "FavoritesBarEnabled": false,
+    "EdgeCollectionsEnabled": false,
+    "DefaultBrowserSettingEnabled": false,
+    "NewTabPageContentEnabled": false,
+    "NewTabPageHideDefaultTopSites": true,
+    "NewTabPageQuickLinksEnabled": false
+}

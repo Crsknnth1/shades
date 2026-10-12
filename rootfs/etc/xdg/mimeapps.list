@@ -1,0 +1,26 @@
+# Shades default apps, Windows-style: Edge for the web, ONLYOFFICE for documents,
+# Wine for Windows programs.
+[Default Applications]
+x-scheme-handler/http=microsoft-edge.desktop
+x-scheme-handler/https=microsoft-edge.desktop
+text/html=microsoft-edge.desktop
+application/xhtml+xml=microsoft-edge.desktop
+application/pdf=microsoft-edge.desktop
+
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=onlyoffice-desktopeditors.desktop
+application/msword=onlyoffice-desktopeditors.desktop
+application/rtf=onlyoffice-desktopeditors.desktop
+application/vnd.oasis.opendocument.text=onlyoffice-desktopeditors.desktop
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=onlyoffice-desktopeditors.desktop
+application/vnd.ms-excel=onlyoffice-desktopeditors.desktop
+text/csv=onlyoffice-desktopeditors.desktop
+application/vnd.oasis.opendocument.spreadsheet=onlyoffice-desktopeditors.desktop
+application/vnd.openxmlformats-officedocument.presentationml.presentation=onlyoffice-desktopeditors.desktop
+application/vnd.ms-powerpoint=onlyoffice-desktopeditors.desktop
+application/vnd.oasis.opendocument.presentation=onlyoffice-desktopeditors.desktop
+
+application/x-ms-dos-executable=shades-wine.desktop
+application/vnd.microsoft.portable-executable=shades-wine.desktop
+application/x-msdownload=shades-wine.desktop
+application/x-msi=shades-wine.desktop
+application/x-ms-shortcut=shades-wine.desktop

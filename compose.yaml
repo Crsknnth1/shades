@@ -9,3 +9,7 @@ services:
     ports:
       - "127.0.0.1:6080:6080"
     shm_size: 2gb
+    # Edge's sandbox needs user namespaces, which Docker's default seccomp profile blocks.
+    # Relaxing it keeps the browser sandbox on; the real distro doesn't need this.
+    security_opt:
+      - seccomp=unconfined

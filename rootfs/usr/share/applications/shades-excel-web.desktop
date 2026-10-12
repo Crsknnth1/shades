@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Excel (web)
+Comment=Microsoft Excel in the browser. Needs a Microsoft account.
+Exec=microsoft-edge --app=https://www.office.com/launch/excel
+Icon=x-office-spreadsheet
+Categories=Office;Spreadsheet;

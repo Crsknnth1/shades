@@ -11,6 +11,9 @@ export XDG_CURRENT_DESKTOP=KDE
 export XDG_MENU_PREFIX=plasma-
 mkdir -p "$XDG_RUNTIME_DIR" && chmod 700 "$XDG_RUNTIME_DIR"
 
+# A container that was killed (e.g. by a Docker restart) leaves its X lock behind.
+rm -f /tmp/.X1-lock /tmp/.X11-unix/X1
+
 # VNC listens only inside the container; the browser reaches it through websockify.
 Xvnc :1 -geometry "${SHADES_GEOMETRY:-1600x900}" -depth 24 \
     -SecurityTypes None -localhost yes -AlwaysShared &

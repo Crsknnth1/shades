@@ -1,0 +1,5 @@
+# No KDE Wallet setup wizard: Edge and other apps store secrets on their own, like on
+# Windows. Follow-up for the installed system: auto-unlocking wallet via kwallet-pam.
+[Wallet]
+Enabled=false
+First Use=false

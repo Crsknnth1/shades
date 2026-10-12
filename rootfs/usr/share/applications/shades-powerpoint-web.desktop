@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=PowerPoint (web)
+Comment=Microsoft PowerPoint in the browser. Needs a Microsoft account.
+Exec=microsoft-edge --app=https://www.office.com/launch/powerpoint
+Icon=x-office-presentation
+Categories=Office;Presentation;

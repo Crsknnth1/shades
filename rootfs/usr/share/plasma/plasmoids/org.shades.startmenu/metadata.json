@@ -1,0 +1,21 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Shades"
+            }
+        ],
+        "Category": "Application Launchers",
+        "Description": "Windows 11-style Start menu: pinned apps, recommended files, search",
+        "EnabledByDefault": true,
+        "Icon": "shades-start",
+        "Id": "org.shades.startmenu",
+        "License": "GPL-2.0+",
+        "Name": "Start"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.launchermenu"
+    ]
+}

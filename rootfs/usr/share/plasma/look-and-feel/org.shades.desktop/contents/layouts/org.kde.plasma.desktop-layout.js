@@ -8,20 +8,15 @@ panel.floating = false;
 
 panel.addWidget("org.kde.plasma.panelspacer");
 
-var start = panel.addWidget("org.kde.plasma.kickoff");
-start.currentConfigGroup = ["General"];
-start.writeConfig("icon", "shades-start");
-start.writeConfig("favoritesDisplay", 0);       // pinned apps as a grid
-start.writeConfig("applicationsDisplay", 1);    // "All apps" as a list
-start.writeConfig("showActionButtonCaptions", false);
-// Pinned apps are set in scripts/setup-rootfs.sh; Kickoff ignores them here.
+// Shades' own Windows 11-style Start menu (pinned apps are in its config/main.xml).
+panel.addWidget("org.shades.startmenu");
 
 var tasks = panel.addWidget("org.kde.plasma.icontasks");
 tasks.currentConfigGroup = ["General"];
 tasks.writeConfig("launchers", [
     "applications:org.kde.dolphin.desktop",
-    "applications:org.kde.konsole.desktop",
-    "applications:systemsettings.desktop",
+    "applications:microsoft-edge.desktop",
+    "applications:onlyoffice-desktopeditors.desktop",
 ]);
 
 panel.addWidget("org.kde.plasma.panelspacer");

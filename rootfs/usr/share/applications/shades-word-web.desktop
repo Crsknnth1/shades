@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Word (web)
+Comment=Microsoft Word in the browser. Needs a Microsoft account.
+Exec=microsoft-edge --app=https://www.office.com/launch/word
+Icon=x-office-document
+Categories=Office;WordProcessor;

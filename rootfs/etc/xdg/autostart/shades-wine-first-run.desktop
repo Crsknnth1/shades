@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Prepare Windows app support
+Exec=/usr/libexec/shades/wine-first-run
+NoDisplay=true
+X-KDE-autostart-phase=2

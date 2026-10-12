@@ -24,6 +24,29 @@ RUN mkdir -p /out/usr/share/wallpapers/Shades/contents/images \
     && rsvg-convert -w 3840 -h 2160 /src/wallpaper.svg \
         -o /out/usr/share/wallpapers/Shades/contents/images/3840x2160.png
 
+# --- Klassy: Breeze-based window decoration with Windows 11-style titlebar buttons ---
+FROM debian:trixie AS klassy
+
+ARG KLASSY_TAG=v6.3
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        curl ca-certificates build-essential cmake extra-cmake-modules gettext \
+        qt6-base-dev qt6-declarative-dev qt6-svg-dev libx11-dev \
+        libkdecorations3-dev libkf6coreaddons-dev libkf6colorscheme-dev libkf6config-dev \
+        libkf6guiaddons-dev libkf6i18n-dev libkf6iconthemes-dev libkf6windowsystem-dev \
+        libkf6kcmutils-dev libkirigami-dev libkf6style-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /src/klassy \
+    && curl -fsSL "https://github.com/paulmcauley/klassy/archive/refs/tags/${KLASSY_TAG}.tar.gz" \
+        | tar -xz -C /src/klassy --strip-components=1 \
+    && cmake -S /src/klassy -B /build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_TESTING=OFF -DBUILD_QT5=OFF -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+    && cmake --build /build -j"$(nproc)" \
+    && DESTDIR=/out cmake --install /build \
+    # Keep only the decoration and its settings; drop Klassy's own icons and themes.
+    && rm -rf /out/usr/share/icons /out/usr/share/plasma /out/usr/share/color-schemes
+
 # --- Desktop ---
 FROM debian:trixie
 
@@ -42,7 +65,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && sed -i 's/# en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen && locale-gen \
     && rm -rf /var/lib/apt/lists/*
 
+# Apps: Wine, ONLYOFFICE, Microsoft Edge (big and slow-changing, so its own layer).
+COPY scripts/install-apps.sh /tmp/install-apps.sh
+RUN bash /tmp/install-apps.sh && rm /tmp/install-apps.sh
+
 COPY --from=assets /out/ /
+COPY --from=klassy /out/ /
 COPY rootfs/ /tmp/shades-rootfs/
 COPY scripts/setup-rootfs.sh /tmp/setup-rootfs.sh
 RUN bash /tmp/setup-rootfs.sh /tmp/shades-rootfs && rm -rf /tmp/shades-rootfs /tmp/setup-rootfs.sh
@@ -60,5 +88,9 @@ RUN chmod +x /usr/local/bin/start-desktop
 
 USER shades
 WORKDIR /home/shades
+
+# Build the per-user app index and font caches now, so the first app launch isn't slow.
+RUN XDG_MENU_PREFIX=plasma- kbuildsycoca6 --noincremental >/dev/null 2>&1 && fc-cache
+
 EXPOSE 6080
 CMD ["start-desktop"]

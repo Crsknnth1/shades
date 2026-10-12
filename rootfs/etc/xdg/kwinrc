@@ -9,12 +9,13 @@ TopLeft=None
 [Effect-overview]
 BorderActivate=9
 
-# Windows-style titlebar: minimize, maximize, close on the right; nothing on the left.
+# Windows 11-style titlebar (Klassy, see /etc/xdg/klassy/klassyrc): app icon on the left;
+# minimize, maximize, close on the right.
 [org.kde.kdecoration2]
-ButtonsOnLeft=
+ButtonsOnLeft=M
 ButtonsOnRight=IAX
-library=org.kde.breeze
-theme=Breeze
+library=org.kde.klassy
+theme=Klassy
 
 # Alt+Tab shows a grid of window thumbnails.
 [TabBox]

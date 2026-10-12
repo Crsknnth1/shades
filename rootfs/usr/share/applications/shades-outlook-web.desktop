@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Outlook (web)
+Comment=Microsoft Outlook mail and calendar in the browser. Needs a Microsoft account.
+Exec=microsoft-edge --app=https://outlook.office.com/mail/
+Icon=internet-mail
+Categories=Office;Email;Calendar;
