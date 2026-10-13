@@ -90,7 +90,7 @@ Item {
         PlasmaCore.Action {
             text: i18n("Task Manager")
             icon.name: "utilities-system-monitor"
-            onTriggered: winx.run("plasma-systemmonitor")
+            onTriggered: winx.run("shades-taskmanager")
         },
         PlasmaCore.Action {
             text: i18n("Settings")

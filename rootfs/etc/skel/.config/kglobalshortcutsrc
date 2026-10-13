@@ -18,7 +18,7 @@ _launch=Meta+R\tAlt+Space\tAlt+F2\tSearch
 [services][systemsettings.desktop]
 _launch=Meta+I
 
-[services][org.kde.plasma-systemmonitor.desktop]
+[services][shades-taskmanager.desktop]
 _launch=Ctrl+Shift+Esc
 
 # Spectacle already takes Win+Shift+S; free up Win+R (its record-region default) for Run.

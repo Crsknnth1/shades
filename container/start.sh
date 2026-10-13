@@ -13,6 +13,10 @@ export XDG_MENU_PREFIX=plasma-
 # inherit its environment, not Plasma's.
 LANGUAGE="$(kreadconfig6 --file plasma-localerc --group Translations --key LANGUAGE)"
 export LANGUAGE
+# Likewise the rest of Plasma's session environment, so shortcut-launched apps (Win+E,
+# Ctrl+Shift+Esc) get KDE's theme integration. On the real distro systemd passes these on.
+export KDE_FULL_SESSION=true KDE_SESSION_VERSION=6 KDE_SESSION_UID="$(id -u)"
+export XDG_CONFIG_DIRS="$HOME/.config/kdedefaults:/etc/xdg"
 mkdir -p "$XDG_RUNTIME_DIR" && chmod 700 "$XDG_RUNTIME_DIR"
 
 # A container that was killed (e.g. by a Docker restart) leaves its X lock behind.

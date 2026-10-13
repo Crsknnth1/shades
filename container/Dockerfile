@@ -92,9 +92,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Everyday apps in Windows' roles (renamed by setup-rootfs.sh): Notepad, Photos, Calculator,
-# Paint, Media Player, plus zip support and thumbnails in File Explorer.
+# Paint, Media Player, plus zip support and thumbnails in File Explorer. qml-qt6 runs
+# Shades' own Task Manager.
 RUN apt-get update && apt-get install -y --no-install-recommends \
         kwrite gwenview kcalc kolourpaint haruna ark kio-extras \
+        qml-qt6 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=assets /out/ /

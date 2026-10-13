@@ -84,13 +84,14 @@ Shades ships no Microsoft logos, fonts, or wallpapers. It uses look-alikes inste
 | Win+Left / Win+Right | Snap to half the screen |
 | Win+Tab | Task view (Overview) |
 | Win+Shift+S | Screenshot (Spectacle) |
-| Ctrl+Shift+Esc | Task Manager (System Monitor) |
+| Ctrl+Shift+Esc | Task Manager |
 | Alt+Tab | Switch windows (thumbnail grid) |
 
 ## Apps
 
 | App | For |
 |---|---|
+| Task Manager | Shades' own Windows 11-style Task Manager (Ctrl+Shift+Esc): Processes grouped into Apps and Background processes with CPU, Memory, Disk, and Network columns shaded by load, and End task; Performance with live graphs; Startup apps; and Details. Built in QML on KDE's process and sensor engines (`/usr/share/shades/taskmanager`). KDE's System Monitor stays available as "Resource Monitor". |
 | Notepad, Photos, Calculator, Paint, Media Player | KDE's KWrite, Gwenview, KCalc, KolourPaint, and Haruna under Windows names, set as the defaults for text, images, and audio/video. Notepad is set up plain: no line numbers or minimap, word wrap on. |
 | File Explorer | Also opens zip files like folders, as Windows does. |
 | Microsoft Edge | Default browser and PDF viewer. Ships with policies that skip the first-run tour and turn off telemetry, shopping, rewards, Copilot, and the news feed. |
@@ -146,7 +147,7 @@ These only affect the Docker playground, not the real distro:
 - No systemd, so `start.sh` starts KDE's shortcut service (`kglobalacceld`) itself before Plasma.
 - No GPU, so KWin renders in software (llvmpipe).
 - Edge's sandbox needs user namespaces, so `compose.yaml` relaxes Docker's seccomp filter.
-- System Monitor can't see disks or per-app usage.
+- Task Manager can't show disk or network use per process, and Resource Monitor can't see disks.
 
 ## Layout
 

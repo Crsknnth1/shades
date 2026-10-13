@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Task Manager
+Comment=See and end running apps and processes, and check performance
+Exec=shades-taskmanager
+Icon=utilities-system-monitor
+Categories=System;Monitor;
+Keywords=processes;performance;cpu;memory;end task;kill;
+StartupWMClass=shades-taskmanager
+X-KDE-Shortcuts=Ctrl+Shift+Esc

@@ -50,7 +50,7 @@ my @words = (
     [qr/\bSystem Settings\b/, 'Settings'],
     [qr/\bDolphin\b/,         'File Explorer'],
     [qr/\bKonsole\b/,         'Terminal'],
-    [qr/\bSystem Monitor\b/,  'Task Manager'],
+    [qr/\bSystem Monitor\b/,  'Resource Monitor'],
     [qr/\bKWrite\b/,          'Notepad'],
     [qr/\bGwenview\b/,        'Photos'],
     [qr/\bKCalc\b/,           'Calculator'],

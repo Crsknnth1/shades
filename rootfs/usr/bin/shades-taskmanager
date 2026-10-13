@@ -1,0 +1,9 @@
+#!/bin/sh
+# Shades Task Manager (/usr/share/shades/taskmanager/main.qml), run by Qt's qml6 runner.
+# Uses KDE's desktop control style and the Task Manager icon for the window. -name sets the
+# window's X11 instance name to shades-taskmanager, matching StartupWMClass in
+# shades-taskmanager.desktop so the taskbar shows the right icon and name.
+export QT_QUICK_CONTROLS_STYLE="${QT_QUICK_CONTROLS_STYLE:-org.kde.desktop}"
+icon=/usr/share/icons/.Fluent-base/scalable/apps/utilities-system-monitor.svg
+[ -f "$icon" ] || icon=/usr/share/icons/breeze/apps/48/utilities-system-monitor.svg
+exec qml6 --apptype widget -name shades-taskmanager -qwindowicon "$icon" /usr/share/shades/taskmanager/main.qml "$@"

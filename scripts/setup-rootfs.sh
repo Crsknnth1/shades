@@ -8,7 +8,7 @@ src="${1:?usage: setup-rootfs.sh <rootfs-dir>}"
 scripts="$(cd "$(dirname "$0")" && pwd)"
 
 cp -rT "$src" /
-chmod 755 /usr/libexec/shades/*
+chmod 755 /usr/libexec/shades/* /usr/bin/shades-taskmanager
 
 # Shades English (language "en_SH", see /etc/xdg/plasma-localerc): an English copy of every
 # KDE catalog that mentions something Windows calls differently, reworded by
@@ -49,7 +49,7 @@ rename_app() {
 }
 rename_app org.kde.dolphin.desktop "File Explorer"
 rename_app org.kde.konsole.desktop "Terminal"
-rename_app org.kde.plasma-systemmonitor.desktop "Task Manager"
+rename_app org.kde.plasma-systemmonitor.desktop "Resource Monitor"   # KDE System Monitor; Task Manager is Shades' own
 rename_app org.kde.spectacle.desktop "Screenshot"
 rename_app systemsettings.desktop "Settings"
 rename_app org.kde.kwrite.desktop "Notepad"
@@ -96,6 +96,10 @@ menu_qml="$tb/contents/ui/ContextMenu.qml"
 sed -i 's/^\(\s*\)visible: configureAction \&\& configureAction.visible$/\1visible: false \/\/ Shades: no Configure Taskbar/' "$menu_qml"
 grep -q "Shades: no Configure Taskbar" "$menu_qml" \
     || { echo "setup-rootfs: could not patch the task manager's ContextMenu.qml" >&2; exit 1; }
+
+# Ctrl+Shift+Esc opens Task Manager: KDE only reads app shortcuts (X-KDE-Shortcuts) from
+# desktop files in /usr/share/kglobalaccel.
+install -D -m 644 /usr/share/applications/shades-taskmanager.desktop /usr/share/kglobalaccel/shades-taskmanager.desktop
 
 # White, Windows-style pointer everywhere, including outside Plasma.
 update-alternatives --install /usr/share/icons/default/index.theme x-cursor-theme /usr/share/shades/cursor.theme 100
